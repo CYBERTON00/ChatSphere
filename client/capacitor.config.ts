@@ -5,9 +5,7 @@ const config: CapacitorConfig = {
   appName: 'ChatSphere',
   webDir: 'dist',
   server: {
-    androidScheme: 'https',
-    url: 'https://chatsphere-r3fz.onrender.com',
-    cleartext: false
+    androidScheme: 'https'
   },
   plugins: {
     SplashScreen: {

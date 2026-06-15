@@ -32,6 +32,8 @@ jobs:
 
       - name: Build client
         working-directory: client
+        env:
+          VITE_API_URL: https://chatsphere-r3fz.onrender.com
         run: npm run build
 
       - name: Install Capacitor
