@@ -23,7 +23,7 @@ router.post('/register', validate(registerSchema), async (req, res) => {
     await supabase.from('profiles').insert({ id: user.id, username, display_name: displayName });
 
     const tokens = generateTokens({ id: user.id, email: user.email, role: user.role });
-    res.status(201).json({ user: { id: user.id, email: user.email, username, displayName, role: user.role }, ...tokens });
+    res.status(201).json({ user: { id: user.id, email: user.email, username, display_name: displayName, role: user.role }, ...tokens });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }

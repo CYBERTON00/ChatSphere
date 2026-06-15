@@ -96,13 +96,17 @@ export const useChatStore = create<ChatState>((set, get) => ({
   unreadCount: 0,
 
   loadUsers: async () => {
-    const data = await api.get('/api/users');
-    if (Array.isArray(data)) set({ users: data });
+    try {
+      const data = await api.get('/api/users');
+      if (Array.isArray(data)) set({ users: data });
+    } catch (e) { console.error('loadUsers failed', e); }
   },
 
   loadGroups: async () => {
-    const data = await api.get('/api/groups');
-    if (Array.isArray(data)) set({ groups: data });
+    try {
+      const data = await api.get('/api/groups');
+      if (Array.isArray(data)) set({ groups: data });
+    } catch (e) { console.error('loadGroups failed', e); }
   },
 
   setCurrentChat: (chat) => {
@@ -110,13 +114,17 @@ export const useChatStore = create<ChatState>((set, get) => ({
   },
 
   loadMessages: async (userId) => {
-    const data = await api.get(`/api/messages/${userId}`);
-    if (Array.isArray(data)) set({ messages: data });
+    try {
+      const data = await api.get(`/api/messages/${userId}`);
+      if (Array.isArray(data)) set({ messages: data });
+    } catch (e) { console.error('loadMessages failed', e); }
   },
 
   loadGroupMessages: async (groupId) => {
-    const data = await api.get(`/api/messages/group/${groupId}`);
-    if (Array.isArray(data)) set({ messages: data });
+    try {
+      const data = await api.get(`/api/messages/group/${groupId}`);
+      if (Array.isArray(data)) set({ messages: data });
+    } catch (e) { console.error('loadGroupMessages failed', e); }
   },
 
   sendMessage: (data) => {
