@@ -8,7 +8,8 @@ on:
 jobs:
   build-apk:
     runs-on: ubuntu-latest
-    steps:      - name: Checkout
+    steps:
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
