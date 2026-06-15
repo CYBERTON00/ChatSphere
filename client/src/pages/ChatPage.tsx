@@ -7,8 +7,8 @@ import { MessageBubble } from '@/components/MessageBubble';
 import { Avatar } from '@/components/ui/Avatar';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { getInitials, cn } from '@/lib/utils';
-import { Send, Search, LogOut, Phone, Video, Users, Plus, Settings, Bell, ArrowLeft, Smile, Image as ImageIcon } from 'lucide-react';
+import { Icons } from '@/lib/icons';
+import { cn } from '@/lib/utils';
 
 export default function ChatPage() {
   const { user, logout } = useAuthStore();
@@ -99,6 +99,8 @@ export default function ChatPage() {
     u.display_name?.toLowerCase().includes(search.toLowerCase()) || u.username?.toLowerCase().includes(search.toLowerCase())
   );
 
+  const getInitials = (name: string) => name?.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || '?';
+
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
@@ -110,16 +112,16 @@ export default function ChatPage() {
             <span className="font-semibold">{user?.display_name}</span>
           </div>
           <div className="flex gap-1">
-            <Button variant="ghost" size="icon" onClick={() => navigate('/notifications')}><Bell size={18} /></Button>
-            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')}><Settings size={18} /></Button>
-            <Button variant="ghost" size="icon" onClick={() => { logout(); navigate('/login'); }}><LogOut size={18} /></Button>
+            <Button variant="ghost" size="icon" onClick={() => navigate('/notifications')} dangerouslySetInnerHTML={{ __html: Icons.bell }} />
+            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} dangerouslySetInnerHTML={{ __html: Icons.settings }} />
+            <Button variant="ghost" size="icon" onClick={() => { logout(); navigate('/login'); }} dangerouslySetInnerHTML={{ __html: Icons.logout }} />
           </div>
         </div>
 
         {/* Search */}
         <div className="px-4 py-2">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground [&>svg]:w-4 [&>svg]:h-4" dangerouslySetInnerHTML={{ __html: Icons.search }} />
             <input placeholder="Search chats..." className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-secondary text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring" value={search} onChange={e => setSearch(e.target.value)} />
           </div>
         </div>
@@ -129,7 +131,7 @@ export default function ChatPage() {
           <div className="px-4 py-2">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-medium text-muted-foreground uppercase">Groups</span>
-              <Button variant="ghost" size="icon" className="h-6 w-6"><Plus size={14} /></Button>
+              <Button variant="ghost" size="icon" className="h-6 w-6 [&>svg]:w-3.5 [&>svg]:h-3.5" dangerouslySetInnerHTML={{ __html: Icons.plus }} />
             </div>
             {groups.map(group => (
               <ChatListItem key={group.id} name={group.name} avatar={group.avatar_url} isGroup isActive={currentChat?.id === group.id} onClick={() => handleChatSelect({ ...group, type: 'group' })} />
@@ -157,7 +159,7 @@ export default function ChatPage() {
           <>
             {/* Chat Header */}
             <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-background">
-              <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setCurrentChat(null)}><ArrowLeft size={18} /></Button>
+              <Button variant="ghost" size="icon" className="md:hidden [&>svg]:w-5 [&>svg]:h-5" dangerouslySetInnerHTML={{ __html: Icons.arrowLeft }} onClick={() => setCurrentChat(null)} />
               <Avatar src={currentChat.avatar_url} fallback={getInitials(currentChat.display_name || currentChat.name || '?')} isOnline={currentChat.is_online} />
               <div className="flex-1">
                 <h3 className="font-semibold">{currentChat.display_name || currentChat.name}</h3>
@@ -168,8 +170,8 @@ export default function ChatPage() {
                 )}
               </div>
               <div className="flex gap-1">
-                <Button variant="ghost" size="icon"><Phone size={18} /></Button>
-                <Button variant="ghost" size="icon"><Video size={18} /></Button>
+                <Button variant="ghost" size="icon" dangerouslySetInnerHTML={{ __html: Icons.phone }} />
+                <Button variant="ghost" size="icon" dangerouslySetInnerHTML={{ __html: Icons.video }} />
               </div>
             </div>
 
@@ -184,19 +186,17 @@ export default function ChatPage() {
             {/* Input */}
             <div className="px-4 py-3 border-t border-border">
               <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon"><ImageIcon size={18} /></Button>
-                <Button variant="ghost" size="icon"><Smile size={18} /></Button>
+                <Button variant="ghost" size="icon" dangerouslySetInnerHTML={{ __html: Icons.image }} />
+                <Button variant="ghost" size="icon" dangerouslySetInnerHTML={{ __html: Icons.smile }} />
                 <Input placeholder="Type a message..." value={messageInput} onChange={e => setMessageInput(e.target.value)} onKeyDown={handleKeyDown} className="flex-1" />
-                <Button size="icon" onClick={handleSend} disabled={!messageInput.trim()}><Send size={18} /></Button>
+                <Button size="icon" onClick={handleSend} disabled={!messageInput.trim()} dangerouslySetInnerHTML={{ __html: Icons.send }} />
               </div>
             </div>
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center text-center p-8">
             <div>
-              <div className="h-20 w-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="h-10 w-10 text-primary" />
-              </div>
+              <div className="h-20 w-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 [&>svg]:w-10 [&>svg]:h-10 [&>svg]:text-primary" dangerouslySetInnerHTML={{ __html: Icons.chat }} />
               <h2 className="text-2xl font-bold mb-2">Welcome to ChatSphere</h2>
               <p className="text-muted-foreground">Select a conversation or start a new one</p>
             </div>

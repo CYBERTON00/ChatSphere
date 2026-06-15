@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { MessageCircle } from 'lucide-react';
+import { Icons } from '@/lib/icons';
 
 export default function SignupPage() {
   const [form, setForm] = useState({ email: '', password: '', username: '', displayName: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
   const register = useAuthStore(s => s.register);
   const navigate = useNavigate();
 
@@ -30,9 +31,7 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="mx-auto h-16 w-16 bg-primary rounded-2xl flex items-center justify-center mb-4">
-            <MessageCircle className="h-8 w-8 text-primary-foreground" />
-          </div>
+          <div className="mx-auto h-16 w-16 bg-primary rounded-2xl flex items-center justify-center mb-4 [&>svg]:w-8 [&>svg]:h-8 [&>svg]:text-primary-foreground" dangerouslySetInnerHTML={{ __html: Icons.chat }} />
           <h1 className="text-3xl font-bold">Create account</h1>
           <p className="text-muted-foreground mt-2">Join ChatSphere today</p>
         </div>
@@ -41,7 +40,10 @@ export default function SignupPage() {
           <Input placeholder="Display Name" value={form.displayName} onChange={e => setForm({ ...form, displayName: e.target.value })} required />
           <Input placeholder="Username" value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} required />
           <Input type="email" placeholder="Email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
-          <Input type="password" placeholder="Password (min 8 characters)" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} required minLength={8} />
+          <div className="relative">
+            <Input type={showPass ? 'text' : 'password'} placeholder="Password (min 8 characters)" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} required minLength={8} />
+            <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground [&>svg]:w-5 [&>svg]:h-5" dangerouslySetInnerHTML={{ __html: showPass ? Icons.eye : Icons.lock }} />
+          </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button type="submit" className="w-full" size="lg" isLoading={loading}>Create Account</Button>
         </form>

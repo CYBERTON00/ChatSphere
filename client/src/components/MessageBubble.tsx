@@ -1,5 +1,5 @@
 import { cn, formatTime } from '@/lib/utils';
-import { Check, CheckCheck, Edit2, Trash2 } from 'lucide-react';
+import { Icons } from '@/lib/icons';
 import { useState } from 'react';
 
 interface MessageBubbleProps {
@@ -41,7 +41,7 @@ export function MessageBubble({ message, isSent, showSender, onEdit, onDelete, o
           <div className={cn('flex items-center gap-1 mt-1', isSent ? 'justify-end' : 'justify-start')}>
             <span className="text-[10px] opacity-60">{formatTime(message.created_at)}</span>
             {isSent && (
-              <span className="opacity-60">{message.is_edited ? <CheckCheck size={12} /> : <Check size={12} />}</span>
+              <span className="opacity-60 [&>svg]:w-3 [&>svg]:h-3" dangerouslySetInnerHTML={{ __html: message.is_edited ? Icons.doubleCheck : Icons.check }} />
             )}
             {message.is_edited && <span className="text-[10px] opacity-60">(edited)</span>}
           </div>
@@ -50,8 +50,8 @@ export function MessageBubble({ message, isSent, showSender, onEdit, onDelete, o
         {showActions && isSent && (
           <div className="absolute -top-2 right-0 flex gap-1 bg-background border rounded-lg p-1 shadow-lg z-10">
             <button onClick={() => setShowEmojis(!showEmojis)} className="p-1 hover:bg-accent rounded text-xs">😀</button>
-            {onEdit && <button onClick={() => onEdit(message.id, message.content)} className="p-1 hover:bg-accent rounded"><Edit2 size={12} /></button>}
-            {onDelete && <button onClick={() => onDelete(message.id)} className="p-1 hover:bg-accent rounded text-destructive"><Trash2 size={12} /></button>}
+            {onEdit && <button onClick={() => onEdit(message.id, message.content)} className="p-1 hover:bg-accent rounded [&>svg]:w-3 [&>svg]:h-3" dangerouslySetInnerHTML={{ __html: Icons.edit }} />}
+            {onDelete && <button onClick={() => onDelete(message.id)} className="p-1 hover:bg-accent rounded text-destructive [&>svg]:w-3 [&>svg]:h-3" dangerouslySetInnerHTML={{ __html: Icons.trash }} />}
           </div>
         )}
 
