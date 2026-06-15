@@ -36,17 +36,11 @@ jobs:
 
       - name: Install Capacitor
         working-directory: client
-        run: |
-          npm install @capacitor/core @capacitor/cli @capacitor/android
-
-      - name: Init Capacitor
-        working-directory: client
-        run: |
-          npx cap init "ChatSphere" "com.chatsphere.app" --web-dir dist
+        run: npm install @capacitor/core @capacitor/cli @capacitor/android
 
       - name: Add Android platform
         working-directory: client
-        run: npx cap add android
+        run: npx cap add android || echo "Platform already exists"
 
       - name: Sync web to Android
         working-directory: client
