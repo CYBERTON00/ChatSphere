@@ -1,0 +1,8 @@
+{
+  "name": "chatsphere",
+  "private": true,
+  "scripts": {
+    "build": "cd server && npm install && npm run build",
+    "start": "cd server && node dist/index.js"
+  }
+}
