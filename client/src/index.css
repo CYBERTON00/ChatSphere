@@ -54,24 +54,6 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes loading-bar {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(232, 224, 208, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(232, 224, 208, 0.3); }
-}
-
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-loading-bar {
-  animation: loading-bar 1.5s ease-in-out forwards;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
 }
