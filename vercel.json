@@ -4,8 +4,8 @@
   "framework": "vite",
   "installCommand": "npm install",
   "rewrites": [
-    { "source": "/socket.io/(.*)", "destination": "https://chatsphere-server.up.railway.app/socket.io/$1" },
-    { "source": "/api/(.*)", "destination": "https://chatsphere-server.up.railway.app/api/$1" },
+    { "source": "/socket.io/(.*)", "destination": "https://chatsphere-r3fz.onrender.com/socket.io/$1" },
+    { "source": "/api/(.*)", "destination": "https://chatsphere-r3fz.onrender.com/api/$1" },
     { "source": "/((?!api|socket.io|assets).*)", "destination": "/index.html" }
   ],
   "headers": [
