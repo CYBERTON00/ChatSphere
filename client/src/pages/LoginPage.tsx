@@ -32,7 +32,17 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
-          <div className="mx-auto h-16 w-16 bg-primary rounded-2xl flex items-center justify-center mb-4 [&>svg]:w-8 [&>svg]:h-8 [&>svg]:text-primary-foreground" dangerouslySetInnerHTML={{ __html: Icons.chat }} />
+          <div className="mx-auto mb-6 animate-pulse-glow">
+            <svg width="80" height="80" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="200" height="200" rx="40" fill="#2a2520"/>
+              <g transform="translate(30, 40)">
+                <rect x="0" y="20" width="20" height="100" rx="3" fill="#5a5040"/>
+                <path d="M65 30 C40 30, 30 50, 30 70 C30 90, 40 110, 65 110" stroke="#e8e0d0" stroke-width="18" stroke-linecap="round" fill="none"/>
+                <path d="M90 110 L115 30 L140 110" stroke="#e8e0d0" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <line x1="98" y1="85" x2="132" y2="85" stroke="#e8e0d0" stroke-width="14" stroke-linecap="round"/>
+              </g>
+            </svg>
+          </div>
           <h1 className="text-3xl font-bold">Welcome back</h1>
           <p className="text-muted-foreground mt-2">Sign in to continue to ChatSphere</p>
         </div>

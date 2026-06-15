@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --background: 222 47% 7%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 7%;
-    --card-foreground: 210 40% 98%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --background: 20 15% 7%;
+    --foreground: 36 20% 90%;
+    --card: 20 15% 9%;
+    --card-foreground: 36 20% 90%;
+    --primary: 36 20% 85%;
+    --primary-foreground: 20 15% 7%;
+    --secondary: 20 12% 15%;
+    --secondary-foreground: 36 20% 90%;
+    --muted: 20 12% 15%;
+    --muted-foreground: 20 10% 50%;
+    --accent: 20 12% 15%;
+    --accent-foreground: 36 20% 90%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 239 84% 67%;
+    --border: 20 12% 18%;
+    --input: 20 12% 15%;
+    --ring: 36 20% 65%;
     --radius: 0.75rem;
   }
 
@@ -47,4 +47,31 @@
     background: hsl(var(--muted-foreground) / 0.3);
     border-radius: 3px;
   }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes loading-bar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(232, 224, 208, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(232, 224, 208, 0.3); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.5s ease-in-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
